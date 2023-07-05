@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GoogleMapDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xlf-zw-gM0">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xuF-9c-zHD">
+                                <rect key="frame" x="75" y="69.666666666666686" width="243" height="32"/>
+                                <segments>
+                                    <segment title="Draw Polyline"/>
+                                    <segment title="Request polyline"/>
+                                </segments>
+                                <connections>
+                                    <action selector="indexChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="ycR-xa-kjY"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xlf-zw-gM0" secondAttribute="trailing" id="3VJ-Au-rgS"/>
+                            <constraint firstItem="xuF-9c-zHD" firstAttribute="centerY" secondItem="Xlf-zw-gM0" secondAttribute="centerY" multiplier="1/5" id="9AX-UY-c6X"/>
+                            <constraint firstItem="Xlf-zw-gM0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="G0N-Ag-8Uy"/>
+                            <constraint firstItem="Xlf-zw-gM0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Inj-BV-Zbo"/>
+                            <constraint firstAttribute="bottom" secondItem="Xlf-zw-gM0" secondAttribute="bottom" id="MlF-d2-2vk"/>
+                            <constraint firstItem="xuF-9c-zHD" firstAttribute="centerX" secondItem="Xlf-zw-gM0" secondAttribute="centerX" id="wTY-z1-7CH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapContainerView" destination="Xlf-zw-gM0" id="Oom-kv-Mdu"/>
+                        <outlet property="polylineOptionSegment" destination="xuF-9c-zHD" id="fbs-41-WLZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

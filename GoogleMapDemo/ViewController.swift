@@ -29,6 +29,10 @@ class ViewController: UIViewController {
 	var indexPoint = 0
 	var locationHistory = [CLLocationCoordinate2D]()
 	
+	var currentSegment: Int = 0
+	
+	var doneInitialSetup = false
+	
 	let mockPath: [CLLocationCoordinate2D] = [
 		CLLocationCoordinate2D(latitude: 21.027959, longitude: 105.853688),
 		CLLocationCoordinate2D(latitude: 21.027682, longitude: 105.854949),
@@ -56,6 +60,12 @@ class ViewController: UIViewController {
 	
 	@IBAction func indexChanged(sender: UISegmentedControl) {
 		appleMapView.isHidden = true
+		currentSegment = sender.selectedSegmentIndex
+		
+		let location = locationHistory.last ?? CLLocationCoordinate2D(latitude: 21.027959, longitude: 105.853688)
+		let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 16.0)
+		mapView = GMSMapView.map(withFrame: mapContainerView.frame, camera: camera)
+		
 		switch sender.selectedSegmentIndex
 		{
 		case 0:
@@ -64,7 +74,9 @@ class ViewController: UIViewController {
 			drawpath(positions: mockPath)
 		case 2:
 			appleMapView.isHidden = false
-			centerMapOnLocation(location: CLLocation(latitude: 21.00482361, longitude: 105.80686335))
+			if let last = locationHistory.last {
+				centerMapOnLocation(location: CLLocation(latitude: last.latitude, longitude: last.latitude))
+			}
 		default:
 			break; 
 		}

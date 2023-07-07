@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import GoogleMaps
 
 extension ViewController: CLLocationManagerDelegate
 {
@@ -18,11 +19,27 @@ extension ViewController: CLLocationManagerDelegate
 	}
 	
 	func startRequestLocation() {
-		Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in 
+		Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [unowned self] _ in 
 			// Request a user’s location once
-			self?.locationManager.requestLocation()
-			if let location = self?.locationHistory {
-				self?.drawPlaceMark(location: location)
+			locationManager.requestLocation()
+			
+			if !doneInitialSetup, let location = locationHistory.last {
+				let camera = GMSCameraPosition.camera(withLatitude: location.latitude, longitude: location.longitude, zoom: 16.0)
+				mapView = GMSMapView.map(withFrame: mapContainerView.frame, camera: camera)
+				mapContainerView.addSubview(mapView!)
+				doneInitialSetup = true
+			}
+			
+
+			switch currentSegment {
+			case 0:
+				drawPolyline(mockPath: locationHistory)
+			case 1:
+				drawpath(positions: locationHistory)
+			case 2:
+					drawPlaceMark(location: locationHistory)
+			default:
+				return
 			}
 		}
 	}
@@ -31,6 +48,7 @@ extension ViewController: CLLocationManagerDelegate
 		let TIMEOUT_INTERVAL = 3.0
 //		centerMapOnLocation(location: locations.last!)
 		let newLocation = locations.last as! CLLocation
+		locationHistory.append(CLLocationCoordinate2D(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude))
 		print("didupdateLastLocation \(newLocation)")
 		showToast(message: "\(newLocation)")
 //		locationHistory.append(CLLocationCoordinate2D(latitude: newLocation.coordinate.latitude, longitude: newLocation.coordinate.longitude))

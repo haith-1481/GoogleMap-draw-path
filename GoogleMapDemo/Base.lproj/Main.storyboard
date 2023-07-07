@@ -2,7 +2,9 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,11 +22,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYw-zE-ivo">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <standardMapConfiguration key="preferredConfiguration"/>
+                            </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xuF-9c-zHD">
-                                <rect key="frame" x="75" y="69.666666666666686" width="243" height="32"/>
+                                <rect key="frame" x="14" y="69.666666666666671" width="365" height="32"/>
                                 <segments>
                                     <segment title="Draw Polyline"/>
                                     <segment title="Request polyline"/>
+                                    <segment title="MapView"/>
                                 </segments>
                                 <connections>
                                     <action selector="indexChangedWithSender:" destination="BYZ-38-t0r" eventType="valueChanged" id="ycR-xa-kjY"/>
@@ -35,14 +42,19 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Xlf-zw-gM0" secondAttribute="trailing" id="3VJ-Au-rgS"/>
+                            <constraint firstItem="JYw-zE-ivo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3uZ-x9-gZ3"/>
+                            <constraint firstItem="JYw-zE-ivo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="3z0-Yo-Qqp"/>
                             <constraint firstItem="xuF-9c-zHD" firstAttribute="centerY" secondItem="Xlf-zw-gM0" secondAttribute="centerY" multiplier="1/5" id="9AX-UY-c6X"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="JYw-zE-ivo" secondAttribute="bottom" id="FQ3-tq-N4n"/>
                             <constraint firstItem="Xlf-zw-gM0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="G0N-Ag-8Uy"/>
                             <constraint firstItem="Xlf-zw-gM0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Inj-BV-Zbo"/>
                             <constraint firstAttribute="bottom" secondItem="Xlf-zw-gM0" secondAttribute="bottom" id="MlF-d2-2vk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JYw-zE-ivo" secondAttribute="trailing" id="gmU-28-upk"/>
                             <constraint firstItem="xuF-9c-zHD" firstAttribute="centerX" secondItem="Xlf-zw-gM0" secondAttribute="centerX" id="wTY-z1-7CH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="appleMapView" destination="JYw-zE-ivo" id="pDX-Yx-rl0"/>
                         <outlet property="mapContainerView" destination="Xlf-zw-gM0" id="Oom-kv-Mdu"/>
                         <outlet property="polylineOptionSegment" destination="xuF-9c-zHD" id="fbs-41-WLZ"/>
                     </connections>

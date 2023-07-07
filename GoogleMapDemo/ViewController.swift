@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import GoogleMaps
+import MapKit
 
 class ViewController: UIViewController {
 
@@ -15,7 +16,18 @@ class ViewController: UIViewController {
 	
 	@IBOutlet weak var polylineOptionSegment: UISegmentedControl!
 	
+	@IBOutlet weak var appleMapView: MKMapView!
+	
 	var mapView: GMSMapView?
+		
+	var lastLocation: CLLocation?
+	
+	let locationManager = CLLocationManager()
+	
+	var placeAnnotation:  [String]?
+	var sourceLocation: CLLocationCoordinate2D!
+	var indexPoint = 0
+	var locationHistory = [CLLocationCoordinate2D]()
 	
 	let mockPath: [CLLocationCoordinate2D] = [
 		CLLocationCoordinate2D(latitude: 21.027959, longitude: 105.853688),
@@ -36,16 +48,23 @@ class ViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		appleMapView.isHidden = true
 		setupMap()
+		setupCoreLocation()
+		startRequestLocation()
 	}
 	
 	@IBAction func indexChanged(sender: UISegmentedControl) {
+		appleMapView.isHidden = true
 		switch sender.selectedSegmentIndex
 		{
 		case 0:
 			drawPolyline(mockPath: mockPath)
 		case 1:
 			drawpath(positions: mockPath)
+		case 2:
+			appleMapView.isHidden = false
+			centerMapOnLocation(location: CLLocation(latitude: 21.00482361, longitude: 105.80686335))
 		default:
 			break; 
 		}
